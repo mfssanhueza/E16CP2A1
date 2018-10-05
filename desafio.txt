@@ -1,4 +1,18 @@
 desafío:
 CREATE TABLE Users (id SERIAL PRIMARY KEY, name VARCHAR(40));
+
 CREATE TABLE Images (id serial PRIMARY KEY, name varchar(40), user_id integer REFERENCES Users(id));
+
+CREATE TABLE tags(
+image_id INTEGER REFERENCES Images(id),
+name VARCHAR(15) NOT NULL,
+PRIMARY KEY (image_id, name)
+);
+
+CREATE TABLE likes(
+user_id INTEGER REFERENCES Users(id),
+image_id INTEGER REFERENCES Images(id),
+liked_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (user_id, image_id)
+);
 
